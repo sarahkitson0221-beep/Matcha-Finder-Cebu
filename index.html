@@ -403,6 +403,8 @@ footer{background:var(--kombu);color:var(--bone);padding:clamp(80px,10vw,130px) 
 .ask-mail:hover{color:var(--pink);text-decoration-color:var(--pink)}
 .ask-copy{appearance:none;border:0;background:rgba(229,215,196,.12);color:var(--bone);font:inherit;font-size:.8rem;font-weight:700;padding:8px 16px;border-radius:999px;cursor:pointer;transition:background-color 200ms var(--ease-out),transform 120ms var(--ease-out)}
 .ask-copy:hover{background:rgba(229,215,196,.2)} .ask-copy:active{transform:scale(.96)}
+.legal .mail{color:var(--bone);text-decoration:underline;text-decoration-color:rgba(246,191,202,.45);text-underline-offset:.2em;transition:color 200ms var(--ease-out)}
+.legal .mail:hover{color:var(--pink)}
 .legal{margin-top:40px;padding-top:18px;border-top:1px solid rgba(229,215,196,.18);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.78rem;color:var(--tan)}
 
 /* ================= scroll reveal ================= */
@@ -742,12 +744,7 @@ footer{background:var(--kombu);color:var(--bone);padding:clamp(80px,10vw,130px) 
 <footer>
   <div class="wrap">
     <p class="bye">See you at the counter<span>Matcha Finder · Cebu</span></p>
-    <div class="ask">
-      <span class="ask-k">For Inquiries</span>
-      <a class="ask-mail" href="mailto:sarahkitson0221@gmail.com">sarahkitson0221@gmail.com</a>
-      <button type="button" class="ask-copy" id="copyMail">Copy email</button>
-    </div>
-    <div class="legal"><span>An independent guide. Not affiliated with any café listed.</span><span>Made in Cebu, with a lot of matcha</span></div>
+    <div class="legal"><span>For Inquiries: <a class="mail" href="mailto:sarahkitson0221@gmail.com">sarahkitson0221@gmail.com</a></span><span>An independent guide. Not affiliated with any café listed.</span></div>
   </div>
 </footer>
 
@@ -1209,14 +1206,6 @@ const endDrag = () => { if (dragX === null) return; dragX = null; track.classLis
   const i = Math.round(track.scrollLeft / step()); track.scrollTo({ left: i * step(), behavior: reduce ? "auto" : "smooth" }); };
 track.addEventListener("pointerup", endDrag); track.addEventListener("pointercancel", endDrag);
 track.addEventListener("keydown", e => { if (e.key === "ArrowRight") $("#next").click(); if (e.key === "ArrowLeft") $("#prev").click(); });
-
-/* ---------- inquiries ---------- */
-$("#copyMail").addEventListener("click", async e => {
-  const b = e.currentTarget;
-  try { await navigator.clipboard.writeText("sarahkitson0221@gmail.com"); b.textContent = "Copied"; }
-  catch { b.textContent = "Select the address to copy"; }
-  setTimeout(() => b.textContent = "Copy email", 1800);
-});
 
 /* ---------- reveal on scroll ---------- */
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold:.18, rootMargin:"0px 0px -6% 0px" });
